@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'views/homepage.dart';
+import 'views/searchView.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,8 +12,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeView()
+    return  MaterialApp(
+      home: HomeView() , 
+      routes: {
+        "search" : (context) => SearchView()
+      },
       )
     ;
   }
