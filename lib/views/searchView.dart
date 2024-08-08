@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../Services/WeatherApiModel.dart';
+import '../models/WeatherModel.dart';
+
 class SearchView extends StatelessWidget {
-   SearchView({super.key});
+  SearchView({super.key});
 
   TextEditingController cityController = TextEditingController();
 
@@ -15,7 +19,11 @@ class SearchView extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Center(
           child: TextField(
-            controller: cityController,
+            onSubmitted: (value) async {
+              weather_Model =
+                  await WeatherApiModel(Dio()).getCurrentWeather(value);
+              Navigator.of(context).pop();
+            },
             decoration: InputDecoration(
                 hintText: "Enter name of city",
                 hintStyle: const TextStyle(fontSize: 25, color: Colors.grey),
@@ -30,3 +38,5 @@ class SearchView extends StatelessWidget {
     );
   }
 }
+
+WeatherModel? weather_Model;
